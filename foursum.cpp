@@ -41,7 +41,7 @@ vector<vector<int>> fourSum(vector<int>& nums, int target) {
                 long long now=(long long)nums[i]+nums[j]+nums[k]+nums[l];
                 if(now==target){
                     res.push_back({nums[i],nums[j],nums[k],nums[l]});
-                    k=pos[j]+1;
+                    k=pos[k]+1;
                     l=pos1[l]-1;
                 }else if(now>target){
                     l=pos1[l]-1;
