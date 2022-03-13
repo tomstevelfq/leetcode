@@ -5,27 +5,48 @@
 using namespace std;
 
 vector<vector<int>> res;
-set<vector<int>> s;
 vector<vector<int>> fourSum(vector<int>& nums, int target) {
+    vector<int> pos;
+    vector<int> pos1;
     sort(nums.begin(),nums.end());
+    int aa=nums.back();
+    int p=nums.size()-1;
+    for(int i=nums.size()-1;i>=0;i--){
+        if(nums[i]!=aa){
+            aa=nums[i];
+            pos[i]=i;
+            p=i;
+        }else{
+            pos[i]=p;
+        }
+    }
+
+    aa=nums[0];
+    p=0;
     for(int i=0;i<nums.size();i++){
-        for(int j=i+1;j<nums.size();j++){
+        if(nums[i]!=aa){
+            aa=nums[i];
+            pos1[i]=i;
+            p=i;
+        }else{
+            pos1[i]=p;
+        }
+    }
+
+    for(int i=0;i<nums.size();i=pos[i]+1){
+        for(int j=i+1;j<nums.size();j=pos[j]+1){
             int k=j+1;
             int l=nums.size()-1;
             while(k<l){
                 long long now=(long long)nums[i]+nums[j]+nums[k]+nums[l];
                 if(now==target){
-                    vector<int> temp={nums[i],nums[j],nums[k],nums[l]};
-                    if(s.find(temp)==s.end()){
-                        s.insert(temp);
-                        res.push_back(temp);
-                    }
-                    k++;
-                    l--;
+                    res.push_back({nums[i],nums[j],nums[k],nums[l]});
+                    k=pos[j]+1;
+                    l=pos1[l]-1;
                 }else if(now>target){
-                    l--;
+                    l=pos1[l]-1;
                 }else{
-                    k++;
+                    k=pos[k]+1;
                 }
             }
         }
