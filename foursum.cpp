@@ -6,8 +6,8 @@ using namespace std;
 
 vector<vector<int>> res;
 vector<vector<int>> fourSum(vector<int>& nums, int target) {
-    vector<int> pos;
-    vector<int> pos1;
+    vector<int> pos(nums.size(),0);
+    vector<int> pos1(nums.size(),0);
     sort(nums.begin(),nums.end());
     int aa=nums.back();
     int p=nums.size()-1;
@@ -26,7 +26,7 @@ vector<vector<int>> fourSum(vector<int>& nums, int target) {
     for(int i=0;i<nums.size();i++){
         if(nums[i]!=aa){
             aa=nums[i];
-            pos1[i]=i;
+            pos1[i]=i;;
             p=i;
         }else{
             pos1[i]=p;
@@ -41,7 +41,7 @@ vector<vector<int>> fourSum(vector<int>& nums, int target) {
                 long long now=(long long)nums[i]+nums[j]+nums[k]+nums[l];
                 if(now==target){
                     res.push_back({nums[i],nums[j],nums[k],nums[l]});
-                    k=pos[j]+1;
+                    k=pos[k]+1;
                     l=pos1[l]-1;
                 }else if(now>target){
                     l=pos1[l]-1;
@@ -55,8 +55,8 @@ vector<vector<int>> fourSum(vector<int>& nums, int target) {
 }
 
 int main(){
-    vector<int> nums={1000000000,1000000000,1000000000,1000000000};
-    int target=0;
+    vector<int> nums={0,8,0,0,1,1,4,3,1,5,2,2,2};
+    int target=8;
     vector<vector<int>> vv=fourSum(nums,target);
     for(int i=0;i<vv.size();i++){
         for(int j=0;j<vv[i].size();j++){
