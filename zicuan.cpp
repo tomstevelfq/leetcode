@@ -27,7 +27,7 @@ vector<int> findSubstring(string s, vector<string>& words) {
             }
             if((end-j)/len==words.size()){
                 res.push_back(j);
-                ss.erase(ss.find(s.substr(j,j+len)));
+                ss.insert(s.substr(j,j+len));
                 j+=len;
             }
         }
