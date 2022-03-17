@@ -59,5 +59,8 @@ vector<int> searchRange(vector<int>& nums, int target) {
 }
 
 int main() {
+    vector<int> nums={5};
+    int target=1;
+    auto res=searchRange(nums,target);
   return 0;
 }
