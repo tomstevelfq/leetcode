@@ -36,6 +36,7 @@ int longestValidParentheses(string s) {
         }
         res=max(res,num[i]);
     }
+    return res;
 }
 
 int main() {
