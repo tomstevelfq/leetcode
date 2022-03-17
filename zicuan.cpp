@@ -1,39 +1,44 @@
-#include<iostream>
-#include<vector>
-#include<algorithm>
-#include<set>
+#include <algorithm>
+#include <iostream>
+#include <vector>
 using namespace std;
 
-multiset<string> st;
-vector<int> findSubstring(string s, vector<string>& words) {
-    vector<int> res;
-    for(int i=0;i<words.size();i++){
-        st.insert(words[i]);
+int longestValidParentheses(string s) {
+    if(s.size()==0){
+        return 0;
     }
-    multiset<string> ss;
-    int len=words[0].size();
-    for(int i=0;i<len;i++){
-        ss=st;
-        int j=i;
-        int end=j;
-        while(j<=s.size()-words.size()*len){
-            if(st.find(s.substr(end,end+len))!=st.end()){
-                    ss.erase(st.find(s.substr(end,end+len)));
-                    end+len;
+    int res=0;
+    vector<int> vec(s.size(),0);
+    vector<int> num(s.size(),0);
+    if(s[0]=='('){
+        vec[0]=1;
+    }
+    for(int i=0;i<s.size();i++){
+        if(s[i]=='('){
+            vec[i]=vec[i-1]+1;
+        }else{
+            if(vec[i-1]>0){
+                vec[i]=vec[i-1]-1;
+                if(s[i-1]=='('){
+                    if(i>=2&&s[i-2]==')'){
+                        num[i]=num[i-2]+2;
+                    }else{
+                        num[i]=2;
+                    }
                 }else{
-                    ss=st;
-                    end+=len;
-                    j=end;
-            }
-            if((end-j)/len==words.size()){
-                res.push_back(j);
-                ss.insert(s.substr(j,j+len));
-                j+=len;
+                    if(i-2-num[i-1]>=0&&s[i-2-num[i-1]]==')'){
+                        num[i]=num[i-1]+num[i-2-num[i-1]]+2;
+                    }else{
+                        num[i]=num[i-1]+2;
+                    }
+                }
             }
         }
+        res=max(res,num[i]);
     }
-    return res;
 }
-int main(){
-    return 0;
+
+int main() {
+    cout<<longestValidParentheses("(()()(())")<<endl;
+  return 0;
 }
