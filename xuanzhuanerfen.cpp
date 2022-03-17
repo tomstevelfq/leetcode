@@ -6,7 +6,7 @@ using namespace std;
 
 int search(vector<int>& nums, int target) {
     int i=0;
-    int j=nums.size();
+    int j=nums.size()-1;
     int mid;
     while(i<=j){
         mid=(i+j)/2;
