@@ -4,10 +4,7 @@
 #include <vector>
 using namespace std;
 
-vector<int> searchRange(vector<int>& nums, int target) {
-    if(nums.size()==0){
-        return {-1,-1};
-    }
+int searchInsert(vector<int>& nums, int target) {
     int i=0;
     int j=nums.size()-1;
     int mid;
@@ -16,51 +13,23 @@ vector<int> searchRange(vector<int>& nums, int target) {
         if(nums[mid]==target){
             break;
         }else if(nums[mid]>target){
-            j-=1;
+            j=mid-1;
         }else{
-            i+=1;
+            i=mid+1;
         }
     }
     if(nums[mid]==target){
-        int a=0;
-        int b=mid;
-        int c=mid;
-        int d=nums.size()-1;
-        int m;
-        int n;                                                                                                                                                                                                                                                                                                                                                   
-        while(a<=b){
-            m=(a+b)/2;
-            if(nums[m]==target){
-                if(m==0||nums[m-1]!=target){
-                    break;
-                }else{
-                    b=m-1;
-                }
-            }else{
-                a=m+1;
-            }
-        }
-
-        while(c<=d){
-            n=(c+d)/2;
-            if(nums[n]==target){
-                if(n==nums.size()-1||nums[n+1]!=target){
-                    break;
-                }else{
-                    c=n+1;
-                }
-            }else{
-                d=n-1;
-            }
-        }
-        return {m,n};
+        return mid;
+    }else if(nums[mid]>target){
+        return mid;
+    }else{
+        return mid+1;
     }
-    return {-1,-1};
 }
 
 int main() {
-    vector<int> nums={5};
+    vector<int> nums={1};
     int target=1;
-    auto res=searchRange(nums,target);
+    cout<<searchInsert(nums,target)<<endl;
   return 0;
 }
