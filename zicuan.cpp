@@ -26,8 +26,8 @@ int longestValidParentheses(string s) {
                         num[i]=2;
                     }
                 }else{
-                    if(i-2-num[i-1]>=0&&s[i-2-num[i-1]]==')'){
-                        num[i]=num[i-1]+num[i-2-num[i-1]]+2;
+                    if(i-1-num[i-1]>=0&&s[i-1-num[i-1]]==')'){
+                        num[i]=num[i-1]+num[i-1-num[i-1]]+2;
                     }else{
                         num[i]=num[i-1]+2;
                     }
